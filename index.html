@@ -79,30 +79,31 @@ button{
 </head>
 
 <body>
-
 <div class="card">
   <img id="pic" class="gif">
 
   <div id="question" class="question">
-    ¿Te gustaría ser mi cita de San Valentín?
+    ¿Quieres ser mi San Valentín? 😌
   </div>
 
   <div id="buttons" class="btns">
-    <button id="yesBtn" class="yes">Sí ❤️</button>
-    <button id="noBtn" class="no">No 😢</button>
+    <button id="yesBtn" class="yes" onclick="answerYes()">Sí 💖</button>
+    <button id="noBtn" class="no" onclick="answerNo()">Uy no 😭</button>
   </div>
 </div>
-
+  
 <script>
+// GIFS (LOS QUE TÚ DISTE)
+const START_GIF = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGV1Y3psNjJnbms4ODI4eXlxYThidGE1MHQzYWNqODF1aDRpeW5scCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WAJ2pM1Chdnvb06HSH/giphy.gif";
 
-// GIF URLs
-const START_GIF = "https://media2.giphy.com/media/r4UG27LD5Ee5y/giphy.gif";
-const NO_GIF_1 = "https://media3.giphy.com/media/TyySuRrLVNJIY/giphy.gif";
-const NO_GIF_2 = "https://media0.giphy.com/media/1JmGiBtqTuehfYxuy9/giphy.gif";
-const NO_GIF_3 = "https://media1.giphy.com/media/ck27cNlAHxveU/giphy.gif";
-const FINAL_GIF = "https://media4.giphy.com/media/ByPIQpyaB74pa/giphy.gif";
+const NO_GIF_1 = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTNpNXlpMmhmOWJkNHhhYTMyeTBtdmtybnJqdjRvbXZ5ZXZiNGk3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Zl7u48zLVFgLpRwq6f/giphy.gif";
 
-// Elements
+const NO_GIF_2 = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTEwY21zOHA0YXpsaGJlaGJmOGJ2Ymc1bXd0aHN1aXMxY3VsaWs1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1JmGiBtqTuehfYxuy9/giphy.gif";
+
+const NO_GIF_3 = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHd0ZWYzamZuYmVncWxmZ3QwZ3FzNWdoNnI1M2EyeGxidjg3dGV2cSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wvYNSqBAMDVx8CEYkt/giphy.gif";
+
+const FINAL_GIF = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnA1ajNoczI4eXdidzd2aWZ1MWUycGJ2cnRrcDVpZG5peDZyMXdidiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/deOKie3HCHOAo/giphy.gif";
+
 const pic = document.getElementById("pic");
 const question = document.getElementById("question");
 const buttons = document.getElementById("buttons");
@@ -112,53 +113,36 @@ const noBtn = document.getElementById("noBtn");
 let step = 0;
 let yesScale = 1;
 
-// Load first gif
 pic.src = START_GIF;
 
-// Debug safety if gif fails
-pic.onerror = () => {
-  question.textContent = "No se pudo cargar el GIF 😅";
-};
-
-// YES CLICK
-yesBtn.addEventListener("click", () => {
-  question.textContent = "Ouuuuu yeeeeahhh, te amo!";
-  question.classList.add("final");
-  buttons.classList.add("hidden");
-  pic.src = FINAL_GIF;
-});
-
-// NO CLICK
-noBtn.addEventListener("click", () => {
-
+function answerNo(){
   step++;
   yesScale += 0.35;
 
-  // Grow YES button
-  yesBtn.style.transform = `scale(${yesScale})`;
-
-  // Shrink NO button safely
-  const noScale = Math.max(0.2, 1 - step * 0.25);
-  noBtn.style.transform = `scale(${noScale})`;
+  yesBtn.style.transform = ⁠ scale(${yesScale}) ⁠;
+  noBtn.style.transform = ⁠ scale(${1 - step * 0.25}) ⁠;
 
   if(step === 1){
-    question.textContent = "¿Estás segura?";
+    question.textContent = "¿Estás segura? 🥺";
     pic.src = NO_GIF_1;
   }
   else if(step === 2){
-    question.textContent = "¿Segurísima?";
+    question.textContent = "¿Segurísima? 😳";
     pic.src = NO_GIF_2;
   }
   else{
-    question.textContent = "Ya no hay escapatoria 😈";
+    question.textContent = "Ya no hay escapatoria 😌";
     pic.src = NO_GIF_3;
     noBtn.classList.add("hidden");
   }
+}
 
-});
-
+function answerYes(){
+  question.textContent = "Uy ya sabía 😌💘";
+  question.classList.add("final");
+  buttons.classList.add("hidden");
+  pic.src = FINAL_GIF;
+}
 </script>
-
 </body>
 </html>
-
