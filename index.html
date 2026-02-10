@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>San Valentín</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff5f7;
+  font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.card{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.gif{
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.question{
+  margin:16px 0;
+  font-size:20px;
+  font-weight:600;
+}
+
+.final{
+  font-size:30px;
+  font-weight:800;
+  margin:20px 0;
+}
+
+.btns{
+  display:flex;
+  gap:16px;
+  margin-top:18px;
+}
+
+button{
+  flex:1;
+  border:0;
+  padding:14px 16px;
+  border-radius:14px;
+  font-weight:800;
+  font-size:16px;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+
+.yes{
+  background:#ff2d55;
+  color:#fff;
+}
+
+.no{
+  background:#111827;
+  color:#fff;
+}
+
+.hidden{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <img id="pic" class="gif">
+
+  <div id="question" class="question">
+    Te gustaria ser mi cita de San Valentin? 
+  </div>
+
+  <div id="buttons" class="btns">
+    <button id="yesBtn" class="yes" onclick="answerYes()">Sí </button>
+    <button id="noBtn" class="no" onclick="answerNo()"> No </button>
+  </div>
+</div>
+  
+<script>
+// GIFS (LOS QUE TÚ DISTE)
+const START_GIF = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExODQwb2dwbDh1M3JpbDdldHdudnFhYmIxajFsMDF2cXg1Nnpua2pjMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/r4UG27LD5Ee5y/giphy.gif";
+
+const NO_GIF_1 = "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjNvN2J2dzd3Yms2cjdvdTRkd2dlNGloZnlsa3A1Y2d5ZWg0bTk5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TyySuRrLVNJIY/giphy.gif";
+
+const NO_GIF_2 = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTEwY21zOHA0YXpsaGJlaGJmOGJ2Ymc1bXd0aHN1aXMxY3VsaWs1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1JmGiBtqTuehfYxuy9/giphy.gif";
+
+const NO_GIF_3 = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2xqNmIxdHNjbnoyMXU1bWc0d2VxaDVseGtnNHNtZjgxcGpvZXFzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ck27cNlAHxveU/giphy.gif";
+
+const FINAL_GIF = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG01bzZjdjEwbmM5Zm5jOTI0b2NyMDMyc3JnZXNxbHJxbWpmdXZ5biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ByPIQpyaB74pa/giphy.gif";
+
+const pic = document.getElementById("pic");
+const question = document.getElementById("question");
+const buttons = document.getElementById("buttons");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+let step = 0;
+let yesScale = 1;
+
+pic.src = START_GIF;
+
+function answerNo(){
+  step++;
+  yesScale += 0.35;
+
+  yesBtn.style.transform = ⁠ scale(${yesScale}) ⁠;
+  noBtn.style.transform = ⁠ scale(${1 - step * 0.25}) ⁠;
+
+  if(step === 1){
+    question.textContent = "¿Estás segura? ";
+    pic.src = NO_GIF_1;
+  }
+  else if(step === 2){
+    question.textContent = "¿Segurísima? ";
+    pic.src = NO_GIF_2;
+  }
+  else{
+    question.textContent = "Ya no hay escapatoria ";
+    pic.src = NO_GIF_3;
+    noBtn.classList.add("hidden");
+  }
+}
+
+function answerYes(){
+  question.textContent = "Ouuuuu yeeeeahhh, te amo!";
+  question.classList.add("final");
+  buttons.classList.add("hidden");
+  pic.src = FINAL_GIF;
+}
+</script>
+</body>
+</html>
